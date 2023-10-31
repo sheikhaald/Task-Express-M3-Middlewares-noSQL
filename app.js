@@ -16,6 +16,8 @@ app.use((error, req, res, next) => {
   res.status(500).json({ msg: error.msg });
 });
 
+app.use("/media", express.static("public"));
+
 app.listen(8000, () => {
   console.log("The application is running on localhost:8000");
 });

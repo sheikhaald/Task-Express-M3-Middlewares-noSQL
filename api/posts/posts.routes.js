@@ -7,6 +7,7 @@ const {
   postsCreate,
   fetchPost,
 } = require("./posts.controllers");
+const upload = require("../../middleware/multer");
 
 router.param("postId", async (req, res, next, postId) => {
   const post = await fetchPost(postId, next);
@@ -15,7 +16,7 @@ router.param("postId", async (req, res, next, postId) => {
 });
 
 router.get("/", postsGet);
-router.post("/", postsCreate);
+router.post("/", upload.single("image"), postsCreate);
 
 router.delete("/:postId", postsDelete);
 
